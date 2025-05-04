@@ -1,0 +1,15 @@
+# MySQL deployment-related values
+mysql:
+  image: "mysql:8.0"
+  username: "root"
+  password: "test@1234"
+
+# Secret-related values
+secret:
+  name: "mysql-secret"
+
+service:
+  type: ClusterIP
+  port: 3306
+
+

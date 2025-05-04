@@ -1,0 +1,26 @@
+# templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "poc-{{ .Release.Name }}-test"
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: mysql-client
+      image: {{ .Values.mysql.image }}
+      env:
+      - name: MYSQL_PWD
+        valueFrom:
+          secretKeyRef:
+            name: {{ .Values.secret.name }}
+            key: root-password    
+      command: ["mysql"]
+      args: ["-h", "mysql"]
+  restartPolicy: Never
+

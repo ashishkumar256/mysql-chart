@@ -1,0 +1,6 @@
+apiVersion: v2    # Make sure this is compatible with your Helm version
+name: mysql
+description: A minimal MySQL Helm chart example
+type: application
+version: 0.1.0
+appVersion: "8.0" # MySQL version
